@@ -28,11 +28,11 @@ serviceCollection
         .AddSerilog()
         .SetMinimumLevel(LogLevel.Debug));
 
-serviceCollection.AddHttpClient<LaucherInstallerService>();
+serviceCollection.AddHttpClient<LauncherInstallerService>();
 
 var serviceProvider = serviceCollection
     .AddSingleton<LauncherPatcherService>()
-    .AddSingleton<LaucherInstallerService>()
+    .AddSingleton<LauncherInstallerService>()
     .AddSingleton<LauncherConfigurationStore>()
     .BuildServiceProvider();
 
@@ -42,7 +42,7 @@ string installDirectory = Path.Combine(
     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
     Path.GetFileNameWithoutExtension(Constants.Files.BundleExecutableName));
 
-var installer = serviceProvider.GetRequiredService<LaucherInstallerService>();
+var installer = serviceProvider.GetRequiredService<LauncherInstallerService>();
 
 if (await installer.IsLauncherInstalledAsync())
 {
@@ -50,18 +50,18 @@ if (await installer.IsLauncherInstalledAsync())
     {
         await installer.ReinstallLauncherAsync();
     }
-    StartLaucher();
+    StartLauncher();
     return;
 }
 if (await installer.InstallLauncherAsync(installDirectory))
 {
-    StartLaucher();
+    StartLauncher();
     return;
 }
 
 ShowError();
 
-void StartLaucher()
+void StartLauncher()
 {
     logger.LogInformation("Starting launcher");
     var configurationStore = serviceProvider.GetRequiredService<LauncherConfigurationStore>();

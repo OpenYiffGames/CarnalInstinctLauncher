@@ -9,23 +9,23 @@ using System.Security.Cryptography;
 
 namespace CsLauncher;
 
-internal sealed class LaucherInstallerService
+internal sealed class LauncherInstallerService
 {
-    private readonly ILogger<LaucherInstallerService> _logger;
+    private readonly ILogger<LauncherInstallerService> _logger;
     private readonly HttpClient _httpClient;
     private readonly LauncherConfigurationStore _configStore;
-    private readonly LauncherPatcherService laucherPatcher;
+    private readonly LauncherPatcherService launcherPatcher;
 
-    public LaucherInstallerService(
-        ILogger<LaucherInstallerService> logger,
+    public LauncherInstallerService(
+        ILogger<LauncherInstallerService> logger,
         HttpClient httpClient,
         LauncherConfigurationStore configStore,
-        LauncherPatcherService laucherPatcher)
+        LauncherPatcherService launcherPatcher)
     {
         _logger = logger;
         _httpClient = httpClient;
         _configStore = configStore;
-        this.laucherPatcher = laucherPatcher;
+        this.launcherPatcher = launcherPatcher;
     }
 
     public async Task<bool> InstallLauncherAsync(string installationPath)
@@ -84,7 +84,7 @@ internal sealed class LaucherInstallerService
         string executablePath = Path.Combine(installationPath, executableFileName);
         try
         {
-            var patchResult = await laucherPatcher.PatchLauncherAsync(
+            var patchResult = await launcherPatcher.PatchLauncherAsync(
                 executablePath,
                 installationPath
             );
@@ -136,7 +136,7 @@ internal sealed class LaucherInstallerService
                 File.Delete(bundleExecutable);
                 return await InstallLauncherAsync(installationDir);
             }
-            return await laucherPatcher.PatchLauncherAsync(bundleReader, installationDir);
+            return await launcherPatcher.PatchLauncherAsync(bundleReader, installationDir);
         }
         catch (Exception ex)
         {
