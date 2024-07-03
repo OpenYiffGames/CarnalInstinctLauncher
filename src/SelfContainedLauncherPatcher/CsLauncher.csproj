@@ -1,0 +1,71 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PublishAot>true</PublishAot>
+		<InvariantGlobalization>true</InvariantGlobalization>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- This ref is only used to NetCoreHost build happen before ours  -->
+		<ProjectReference Include="..\NetCoreHost\NetCoreHost.vcxproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="dnlib" Version="4.4.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Octopus.Octodiff" Version="2.0.546" />
+		<PackageReference Include="PeNet" Version="4.0.5" />
+		<PackageReference Include="Serilog" Version="4.0.0" />
+		<PackageReference Include="Serilog.Exceptions" Version="8.4.0" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="SharpCompress" Version="0.37.2" />
+		<PackageReference Include="SingleFileExtractor.Core" Version="2.2.0" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<NutCoreHostBuild>..\..\x64\$(Configuration)\</NutCoreHostBuild>
+		<ResouresDir>$(ProjectDir)Resources\</ResouresDir>
+	</PropertyGroup>
+
+	<Target Name="NetCoreHostLauncher" BeforeTargets="PrepareResourceNames">
+		<Message Text="NutCoreHostBuild: $(NutCoreHostBuild)" Importance="high" />
+		<Message Text="TargetDir: $(ResouresDir)" Importance="high" />
+		<ItemGroup>
+			<NutCoreHostBuildOutput Include="$(NutCoreHostBuild)run_launcher.exe" />
+		</ItemGroup>
+		<Message Text="NutCoreHostBuildOutput: @(NutCoreHostBuildOutput)" Importance="high" />
+
+		<!-- Ensure the target directory exists -->
+		<MakeDir Directories="$(ResouresDir)" Condition="!Exists('$(ResouresDir)')" />
+
+		<!-- Use a condition to check if the file exists -->
+		<ItemGroup Condition="Exists('$(NutCoreHostBuild)run_launcher.exe')">
+			<NutCoreHostBuildOutput Exists="true" />
+		</ItemGroup>
+		<ItemGroup Condition="!Exists('$(NutCoreHostBuild)run_launcher.exe')">
+			<NutCoreHostBuildOutput Exists="false" />
+		</ItemGroup>
+
+		<!-- Log the file existence -->
+		<Message Text="File exists: @(NutCoreHostBuildOutput->Exists)" Importance="high" />
+
+		<Copy SourceFiles="@(NutCoreHostBuildOutput)" DestinationFolder="$(ResouresDir)" Condition="Exists('$(NutCoreHostBuild)run_launcher.exe')" />
+
+		<!-- Log after copying -->
+		<Message Text="Copied @(NutCoreHostBuildOutput) to $(ResouresDir)" Importance="high" Condition="Exists('$(NutCoreHostBuild)run_launcher.exe')" />
+		<Message Text="File does not exist: $(NutCoreHostBuild)run_launcher.exe" Importance="high" Condition="!Exists('$(NutCoreHostBuild)run_launcher.exe')" />
+	</Target>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\run_launcher.exe" />
+	</ItemGroup>
+
+</Project>
