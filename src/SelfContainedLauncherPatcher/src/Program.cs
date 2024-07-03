@@ -116,7 +116,7 @@ void ShowError()
     Console.WriteLine("Sorry for the inconvenience, but the launcher could not be started.");
     Console.WriteLine("If you believe this is an error, please open an issue at:");
     Console.ForegroundColor = ConsoleColor.Blue;
-    Console.WriteLine("https://github.com/OpenYiffGames");
+    Console.WriteLine("https://github.com/OpenYiffGames/CarnalInstinctLauncher/issues");
     Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("If possible, please attach the log file located at:");
     Console.ForegroundColor = ConsoleColor.Blue;
