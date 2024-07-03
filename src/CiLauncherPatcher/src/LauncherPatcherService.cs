@@ -3,7 +3,7 @@ using dnlib.DotNet.Emit;
 using Microsoft.Extensions.Logging;
 using SingleFileExtractor.Core;
 
-namespace CsLauncher;
+namespace CiLauncher;
 
 internal sealed class LauncherPatcherService
 {

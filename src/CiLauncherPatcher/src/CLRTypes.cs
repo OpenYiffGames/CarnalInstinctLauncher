@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace CsLauncher;
+namespace CiLauncher;
 
 [StructLayout(LayoutKind.Explicit)]
 struct IMAGE_COR_ILMETHOD

@@ -1,5 +1,5 @@
 ﻿
-namespace CsLauncher;
+namespace CiLauncher;
 
 class PatternScanner
 {

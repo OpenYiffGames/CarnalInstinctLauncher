@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace CsLauncher.Models;
+namespace CiLauncher.Models;
 
 public partial class VersionInfo
 {

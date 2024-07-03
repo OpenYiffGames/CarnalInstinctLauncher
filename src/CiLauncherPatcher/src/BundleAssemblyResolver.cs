@@ -1,7 +1,7 @@
 ﻿using dnlib.DotNet;
 using SingleFileExtractor.Core;
 
-namespace CsLauncher;
+namespace CiLauncher;
 
 class BundleAssemblyResolver : IAssemblyResolver, IDisposable
 {
