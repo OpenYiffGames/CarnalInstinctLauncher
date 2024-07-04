@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using CsLauncher.Models;
+using CiLauncher.Models;
 using System.Text.Json;
 
-namespace CsLauncher;
+namespace CiLauncher;
 
 internal class LauncherConfigurationStore
 {

@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Logging;
 using Octodiff.Core;
-using CsLauncher.Models;
+using CiLauncher.Models;
 using SingleFileExtractor.Core;
 using System.Formats.Tar;
 using System.IO.Compression;
 using System.Reflection;
 using System.Security.Cryptography;
 
-namespace CsLauncher;
+namespace CiLauncher;
 
 internal sealed class LauncherInstallerService
 {
@@ -103,7 +103,7 @@ internal sealed class LauncherInstallerService
 
         using var launcherLoaderFs = new FileStream(Path.Combine(installationPath, Constants.Files.LauncherLoader), FileMode.Create);
         var loaderRs = Assembly.GetExecutingAssembly().GetManifestResourceStream(
-            $"{nameof(CsLauncher)}.{Constants.Directories.ResourcesDirectory}.{Constants.Files.LauncherLoader}");
+            $"{nameof(CiLauncher)}.{Constants.Directories.ResourcesDirectory}.{Constants.Files.LauncherLoader}");
         if (loaderRs == null)
         {
             _logger.LogError("Failed to load launcher loader resource");

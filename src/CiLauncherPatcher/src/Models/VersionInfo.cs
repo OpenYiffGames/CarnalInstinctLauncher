@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace CsLauncher.Models;
+namespace CiLauncher.Models;
 
 [XmlRoot("VersionInfo")]
 public partial class VersionInfo

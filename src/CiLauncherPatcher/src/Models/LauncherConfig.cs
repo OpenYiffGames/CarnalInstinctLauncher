@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace CsLauncher.Models
+namespace CiLauncher.Models
 {
     internal class LauncherConfig
     {

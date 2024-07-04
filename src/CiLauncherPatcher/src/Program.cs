@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CsLauncher;
 using Serilog;
 using Serilog.Exceptions;
 using System.Diagnostics;
+using CiLauncher;
 
 string logPath = Path.Combine(Utils.GetLocalStorageDirectory(), Constants.Files.LogFile);
 
